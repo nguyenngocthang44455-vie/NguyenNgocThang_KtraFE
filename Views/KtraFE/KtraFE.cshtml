@@ -1,0 +1,584 @@
+﻿@{ Layout = null; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>KtraFE</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #eaeded;
+            color: #0f1111;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .amazon-header-top {
+            background-color: #131921;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            gap: 20px;
+        }
+
+        .logo-amazon {
+            display: flex;
+            align-items: center;
+            padding: 4px 8px;
+        }
+
+            .logo-amazon img {
+                height: 28px;
+                width: auto;
+                object-fit: contain;
+            }
+
+        .search-section {
+            flex: 1;
+            max-width: 800px;
+        }
+
+        .search-container {
+            display: flex;
+            width: 100%;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        #search-button {
+            padding: 10px 22px;
+            background-color: #febd69;
+            color: #111;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 15px;
+            transition: background 0.2s;
+        }
+
+            #search-button:hover {
+                background-color: #f3a847;
+            }
+
+        .nav-right-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 14px;
+        }
+
+        .nav-text-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-text-small {
+            font-size: 12px;
+            color: #cccccc;
+        }
+
+        .nav-text-bold {
+            font-weight: bold;
+        }
+
+        .cart-link {
+            display: flex;
+            align-items: flex-end;
+            gap: 5px;
+            font-weight: bold;
+        }
+
+        .cart-icon-container {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            left: 12px;
+            background-color: #ff9900;
+            color: #131921;
+            border-radius: 50%;
+            padding: 1px 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .amazon-header-bottom {
+            background-color: #232f3e;
+            display: flex;
+            align-items: center;
+            padding: 8px 20px;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .menu-all {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links-container {
+            display: flex;
+            gap: 15px;
+        }
+
+            .nav-links-container a:hover, .menu-all:hover {
+                outline: 1px solid #ffffff;
+                padding: 2px 4px;
+                margin: -2px -4px;
+                border-radius: 2px;
+            }
+
+        .main-container {
+            position: relative;
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .banner {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.05), #eaeded 85%), url('https://ssl-images-amazon.com');
+            background-size: cover;
+            background-position: center top;
+            margin-bottom: -160px;
+            padding-top: 30px;
+        }
+
+            .banner h2 {
+                font-size: 28px;
+                background: rgba(255, 255, 255, 0.9);
+                display: inline-block;
+                padding: 15px 25px;
+                border-radius: 2px;
+                color: #0f1111;
+                margin-left: 20px;
+            }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 420px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+            .card h3 {
+                font-size: 19px;
+                font-weight: bold;
+                margin-bottom: 12px;
+                color: #0f1111;
+            }
+
+        .single-image-box {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+            .single-image-box img {
+                max-width: 100%;
+                max-height: 260px;
+                object-fit: contain;
+            }
+
+        .sub-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .sub-item {
+            display: flex;
+            flex-direction: column;
+            font-size: 12px;
+            color: #565959;
+        }
+
+            .sub-item img {
+                width: 100%;
+                height: 110px;
+                object-fit: cover;
+                margin-bottom: 4px;
+            }
+
+        .card-link {
+            font-size: 13px;
+            color: #007185;
+            display: block;
+            margin-top: 15px;
+        }
+
+            .card-link:hover {
+                color: #c7511f;
+                text-decoration: underline;
+            }
+
+        .amazon-footer {
+            background-color: #131a22;
+            color: #dddddd;
+            padding: 40px 20px 30px 20px;
+            margin-top: 40px;
+            font-size: 12px;
+        }
+
+        .footer-links-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 20px;
+            padding-bottom: 40px;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+            .footer-column a {
+                color: #dddddd;
+                text-decoration: none;
+                line-height: 1.3;
+                display: block;
+            }
+
+                .footer-column a strong {
+                    color: #ffffff;
+                    font-size: 11px;
+                    font-weight: bold;
+                }
+
+                .footer-column a span {
+                    color: #999999;
+                    font-size: 10px;
+                }
+
+                .footer-column a:hover strong {
+                    text-decoration: underline;
+                }
+
+        .footer-bottom-info {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-top: 1px solid #232f3e;
+            padding-top: 25px;
+            text-align: center;
+        }
+
+        .policy-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+            .policy-links a {
+                color: #ddd;
+                font-size: 11px;
+            }
+
+                .policy-links a:hover {
+                    text-decoration: underline;
+                }
+
+        .copyright {
+            color: #999999;
+            font-size: 11px;
+        }
+
+        .text-primary {
+            color: #007185;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="amazon-header-top">
+            <a href="#" class="logo-amazon">
+                <img src="@Url.Content("~/Content/image/amazon.png")" alt="Amazon Logo">
+            </a>
+            <a href="#"><span>Deliver to <i class="fa-solid fa-map-pin">viet nam</i> </span></a>
+            <section class="search-section">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search Amazon" />
+                    <button id="search-button"><i class="fas fa-search"></i></button>
+                </div>
+            </section>
+
+            <div class="nav-right-actions">
+                <a href="#" class="nav-text-bold"><i class="fas fa-globe"></i> EN</a>
+
+                <a href="#" class="nav-text-group">
+                    <span class="nav-text-small">Hello, sign in</span>
+                    <span class="nav-text-bold">Account & Lists <i class="fas fa-caret-down"></i></span>
+                </a>
+
+                <a href="#" class="nav-text-group">
+                    <span class="nav-text-small">Returns</span>
+                    <span class="nav-text-bold">& Orders</span>
+                </a>
+
+                <a href="giohang.html" class="cart-link">
+                    <div class="cart-icon-container">
+                        <i class="fas fa-shopping-cart fa-2x"></i>
+                        <span class="cart-count">4</span>
+                    </div>
+                    <span>Cart</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="amazon-header-bottom">
+            <a href="hamburgermenu.html" class="menu-all">
+                <i class="fas fa-bars"></i> All
+            </a>
+            <div class="nav-links-container">
+                <a href="#">Today's Deals</a>
+                <a href="#">Customer Service</a>
+                <a href="#">Registry</a>
+                <a href="#">Gift Cards</a>
+                <a href="#">Sell</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="product-grid">
+
+            <div class="card">
+                <h3>Get your game on</h3>
+                <div class="single-image-box">
+                    <img src="https://ssl-images-amazon.com" alt="Gaming Setup">
+                </div>
+                <a href="#" class="card-link">Shop gaming</a>
+            </div>
+
+            <div class="card">
+                <h3>Shop Fashion for less</h3>
+                <div class="sub-grid-4">
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Jeans under $50">
+                        <span>Jeans under $50</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Tops under $25">
+                        <span>Tops under $25</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Dresses under $30">
+                        <span>Dresses under $30</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Shoes under $10">
+                        <span>Shoes under $10</span>
+                    </div>
+                </div>
+                <a href="#" class="card-link">See all deals</a>
+            </div>
+
+            <div class="card">
+                <h3>Shop for your home essentials</h3>
+                <div class="sub-grid-4">
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Cleaning Tools">
+                        <span>Cleaning Tools</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Home Storage">
+                        <span>Home Storage</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Home Decor">
+                        <span>Home Decor</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Bedding">
+                        <span>Bedding</span>
+                    </div>
+                </div>
+                <a href="#" class="card-link">Discover more in Home</a>
+            </div>
+
+            <div class="card">
+                <h3>Refresh your space</h3>
+                <div class="sub-grid-4">
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Dining">
+                        <span>Dining</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Home">
+                        <span>Home</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Kitchen">
+                        <span>Kitchen</span>
+                    </div>
+                    <div class="sub-item">
+                        <img src="https://ssl-images-amazon.com" alt="Health and Beauty">
+                        <span>Health and Beauty</span>
+                    </div>
+                </div>
+                <a href="#" class="card-link">See more</a>
+            </div>
+
+            <div class="card">
+                <h3>New home arrivals under $50</h3>
+                <div class="sub-grid-4">
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Kitchen"><span>Kitchen & Dining</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Home Improvement"><span>Home Improvement</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Decor"><span>Décor</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Bedding"><span>Bedding & Bath</span></div>
+                </div>
+                <a href="#" class="card-link">Shop the latest from Home</a>
+            </div>
+
+            <div class="card">
+                <h3>Top categories in Kitchen appliances</h3>
+                <div class="sub-grid-4">
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Cooker"><span>Cooker</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Coffee"><span>Coffee</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Pots"><span>Pots and Pans</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Kettles"><span>Kettles</span></div>
+                </div>
+                <a href="#" class="card-link">Explore all products in Kitchen</a>
+            </div>
+
+            <div class="card">
+                <h3>Fashion trends you like</h3>
+                <div class="sub-grid-4">
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Dresses"><span>Dresses</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Knits"><span>Knits</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Jackets"><span>Jackets</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Jewelry"><span>Jewelry</span></div>
+                </div>
+                <a href="#" class="card-link">Explore more</a>
+            </div>
+
+            <div class="card">
+                <h3>Easy updates for elevated spaces</h3>
+                <div class="sub-grid-4">
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Baskets"><span>Baskets & hampers</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Hardware"><span>Hardware</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Accent"><span>Accent furniture</span></div>
+                    <div class="sub-item"><img src="https://ssl-images-amazon.com" alt="Wallpaper"><span>Wallpaper & paint</span></div>
+                </div>
+                <a href="#" class="card-link">Shop home products</a>
+            </div>
+
+        </div>
+
+        <footer class="amazon-footer">
+            <div class="footer-links-grid">
+                <div class="footer-column">
+                    <a href="#"><strong>Amazon Music</strong><br><span>Stream millions of songs</span></a>
+                    <a href="#"><strong>Amazon Business</strong><br><span>Everything For Your Business</span></a>
+                    <a href="#"><strong>IMDb</strong><br><span>Movies, TV & Celebrities</span></a>
+                </div>
+
+                <div class="footer-column">
+                    <a href="#"><strong>Amazon Ads</strong><br><span>Reach customers wherever they spend their time</span></a>
+                    <a href="#"><strong>AmazonGlobal</strong><br><span>Ship Orders Internationally</span></a>
+                    <a href="#"><strong>Kindle Direct Publishing</strong><br><span>Indie Digital & Print Publishing Made Easy</span></a>
+                    <a href="#"><strong>eero WiFi</strong><br><span>Stream 4K Video in Every Room</span></a>
+                </div>
+
+                <div class="footer-column">
+                    <a href="#"><strong>6pm</strong><br><span>Score deals on fashion brands</span></a>
+                    <a href="#"><strong>Amazon Web Services</strong><br><span>Scalable Cloud Computing Services</span></a>
+                    <a href="#"><strong>Prime Video Direct</strong><br><span>Video Distribution Made Easy</span></a>
+                    <a href="#"><strong>Blink</strong><br><span>Smart Security for Every Home</span></a>
+                </div>
+
+                <div class="footer-column">
+                    <a href="#"><strong>AbeBooks</strong><br><span>Books, art & collectibles</span></a>
+                    <a href="#"><strong>Audible</strong><br><span>Listen to Books & Original Audio Performances</span></a>
+                    <a href="#"><strong>Shopbop</strong><br><span>Designer Fashion Brands</span></a>
+                    <a href="#"><strong>Neighbors App</strong><br><span>Real-Time Crime & Safety Alerts</span></a>
+                </div>
+
+                <div class="footer-column">
+                    <a href="#"><strong>ACX</strong><br><span>Audiobook Publishing Made Easy</span></a>
+                    <a href="#"><strong>Box Office Mojo</strong><br><span>Find Movie Box Office Data</span></a>
+                    <a href="#"><strong>Woot!</strong><br><span>Deals and Shenanigans</span></a>
+                    <a href="#"><strong>Amazon Subscription Boxes</strong><br><span>Top subscription boxes – right to your door</span></a>
+                </div>
+
+                <div class="footer-column">
+                    <a href="#"><strong>Sell on Amazon</strong><br><span>Start a Selling Account</span></a>
+                    <a href="#"><strong>Goodreads</strong><br><span>Book reviews & recommendations</span></a>
+                    <a href="#"><strong>Zappos</strong><br><span>Shoes & Clothing</span></a>
+                    <a href="#"><strong>PillPack</strong><br><span>Pharmacy Simplified</span></a>
+                </div>
+
+                <div class="footer-column">
+                    <a href="#"><strong>Veeqo</strong><br><span>Shipping Software Inventory Management</span></a>
+                    <a href="#"><strong>IMDbPro</strong><br><span>Get Info Entertainment Professionals Need</span></a>
+                    <a href="#"><strong>Ring</strong><br><span>Smart Home Security Systems</span></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom-info">
+                <div class="policy-links">
+                    <a href="#">Conditions of Use</a>
+                    <a href="#">Privacy Notice</a>
+                    <a href="#">Consumer Health Data Privacy Disclosure</a>
+                    <a href="#">Your Ads Privacy Choices <i class="fas fa-toggle-on text-primary"></i></a>
+                </div>
+                <div class="copyright">
+                    &copy; 1996-2026, Amazon.com, Inc. or its affiliates
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
